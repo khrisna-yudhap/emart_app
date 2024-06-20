@@ -4,6 +4,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,5 +42,17 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'user-role:administrator'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/users-management', [AdminController::class, 'users_view'])->name('admin.users');
-    Route::post('/users/delete/{id}', [AdminController::class, 'delete_user'])->name('user.nonactive');
+    Route::post('/users/delete/{id}', [AdminController::class, 'delete_user'])->name('user.destroy');
+
+    Route::get('/product-category', [CategoryController::class, 'index'])->name('category.index');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.destroy');
+
+    Route::get('/products-management', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.destroy');
 });

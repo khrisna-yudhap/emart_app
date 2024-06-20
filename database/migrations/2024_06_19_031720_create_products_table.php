@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('product_name');
             $table->text('product_desc');
+            $table->string('product_image')->default('defaultProd.jpg');
             $table->bigInteger('price');
-            $table->smallInteger('category_id');
-            $table->integer('stock');
+            $table->smallInteger('category_id')->default(NULL);
+            $table->integer('stock')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

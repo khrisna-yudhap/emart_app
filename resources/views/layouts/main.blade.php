@@ -59,12 +59,13 @@
     <script src="{{ asset('assets/dist/libs/jsvectormap/dist/maps/world-merc.js') }}" defer></script>
 
     <!-- Tabler Core -->
-    <script src="{{ asset('assets/dist/js/tabler.min.js') }}" defer></script>
+    <script src="{{ asset('assets/dist/js/tabler.js') }}" defer></script>
     <script src="{{ asset('assets/dist/js/demo.min.js') }}" defer></script>
 
     {{-- Addons Libs --}}
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
 
 
     @stack('scripts')

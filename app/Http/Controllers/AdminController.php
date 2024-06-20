@@ -34,6 +34,7 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->softDeletes();
+        $user->delete();
+        return redirect()->route('admin.users');
     }
 }

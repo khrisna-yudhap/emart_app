@@ -6,7 +6,7 @@
                   <span class="navbar-toggler-icon"></span>
               </button>
               <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                  <a href=".">
+                  <a href="{{ route('admin.index') }}">
                       <img src="{{ asset('assets/img/emart-logo.png') }}" width="150" alt="Tabler" class="">
                   </a>
               </h1>
@@ -122,10 +122,10 @@
                               <div class="dropdown-menu">
                                   <div class="dropdown-menu-columns">
                                       <div class="dropdown-menu-column">
-                                          <a class="dropdown-item " href="">
+                                          <a class="dropdown-item " href="{{ route('product.index') }}">
                                               Product
                                           </a>
-                                          <a class="dropdown-item " href="">
+                                          <a class="dropdown-item " href="{{ route('category.index') }}">
                                               Category
                                           </a>
                                       </div>

@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $categories = Category::get();
-        $products = Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')->get(['products.id', 'category_name', 'product_name', 'product_desc', 'price', 'stock', 'product_image']);
+        $products = Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')->get(['products.id', 'category_name', 'product_name', 'product_desc', 'price', 'stock', 'product_image', 'is_active']);
 
         // $questions = Question::leftJoin('answers', 'answers.id', '=', 'questions.answer_key')->orderBy('questions.created_at', 'ASC')->get(['questions.id', 'questions.question', 'questions.answer_key', 'answer', 'pos']);
 
@@ -35,7 +35,6 @@ class ProductController extends Controller
                 'product_name' => 'required|max:255',
                 'product_desc' => 'required',
                 'price' => 'required',
-
             ]);
         } catch (ValidationException $e) {
             $errors = $e->errors();
@@ -56,6 +55,8 @@ class ProductController extends Controller
         $productData->product_image = $imageName;
         $productData->product_desc = $validatedData['product_desc'];
         $productData->price = $validatedData['price'];
+        $productData->stock = $request->stock;
+        $productData->is_active = $request->is_active;
 
         if ($productData->save()) {
 
@@ -125,9 +126,14 @@ class ProductController extends Controller
         }
 
         $categoryId = $request->category_id;
+        $is_active = $request->is_active;
 
         if ($categoryId == null || "") {
-            $categoryId = null;
+            $categoryId = $product['category_id'];
+        }
+
+        if ($is_active == null || "") {
+            $is_active = $product['is_active'];
         }
 
         $updateData = [
@@ -136,6 +142,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stock' => $request->stock,
             'category_id' => $categoryId,
+            'is_active' => $is_active
         ];
 
         if ($product->update($updateData)) {

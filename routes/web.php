@@ -3,8 +3,10 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +38,15 @@ Route::post('/userPost', [UserController::class, 'create'])->name('user.post');
 // User Route
 Route::middleware(['auth'])->group(function () {
     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // CART
+    Route::get('/my-cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/clear-cart', [CartController::class, 'clear_cart'])->name('cart.destroy');
+
+    // ORDER
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
+    Route::get('/order-payment/{invoice_id}', [OrderController::class, 'payment'])->name('order.payment');
 });
 
 // Admin Route

@@ -37,7 +37,6 @@
                                     <tr>
                                         <th class="w-1">No.</th>
                                         <th>Product Category</th>
-
                                         <th></th>
                                     </tr>
                                 </thead>

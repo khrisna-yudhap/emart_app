@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('price');
             $table->smallInteger('category_id')->default(NULL);
             $table->integer('stock')->default(0);
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

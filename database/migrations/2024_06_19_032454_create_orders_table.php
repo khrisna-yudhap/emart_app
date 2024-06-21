@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('invoice_id')->unique();
+            $table->string('invoice_id')->unique();
+            $table->integer('user_id');
+            $table->bigInteger('total_price');
+            $table->enum('status', ['unpaid', 'paid']);
             $table->timestamps();
         });
     }

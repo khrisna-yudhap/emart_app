@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained();
             $table->bigInteger('item_price');
             $table->integer('item_quantity');
+            $table->string('invoice_id');
+            $table->enum('status', ['unpaid', 'paid']);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

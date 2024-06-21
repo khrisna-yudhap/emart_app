@@ -4,14 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
     public function index()
     {
+        $totalCategory = Category::count();
+        $totalProduct = Product::count();
+        $totalUser = User::count();
+
         return view('dashboard', [
             'title' => "Dashboard Admin | E-Mart",
-            'pageIndex' => 0
+            'pageIndex' => 0,
+            'totalCategory' => $totalCategory,
+            'totalProduct' => $totalProduct,
+            'totalUser' => $totalUser,
         ]);
     }
 

@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-lg-3">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{ route('admin.users') }}" class="text-decoration-none">
                                 <div class="card card-sm">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -80,11 +80,9 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium h3 mb-0 text-yellow">
-                                                        232 Users
+                                                        {{ $totalUser }} Users
                                                     </div>
-                                                    <div class="text-muted">
-                                                        already registered
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -95,7 +93,7 @@
                         </div>
 
                         <div class="col-sm-6 col-lg-3">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{ route('product.index') }}" class="text-decoration-none">
                                 <div class="card card-sm">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -118,11 +116,9 @@
                                             <div class="col">
                                                 <div class="col">
                                                     <div class="font-weight-medium h3 mb-0 text-green">
-                                                        123 Products
+                                                        {{ $totalProduct }} Products
                                                     </div>
-                                                    <div class="text-muted">
-                                                        already registered
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -131,7 +127,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-lg-3">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{ route('category.index') }}" class="text-decoration-none">
                                 <div class="card card-sm">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -153,11 +149,9 @@
                                             <div class="col">
                                                 <div class="col">
                                                     <div class="font-weight-medium h3 mb-0 text-orange">
-                                                        4 Product Category
+                                                        {{ $totalCategory }} Product Category
                                                     </div>
-                                                    <div class="text-muted">
-                                                        already registered
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>

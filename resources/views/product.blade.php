@@ -51,6 +51,7 @@
                                         <th width="40%">Description</th>
                                         <th>Price</th>
                                         <th>Total Stock</th>
+                                        <th>Product Status</th>
                                         <th class="w-1"></th>
                                     </tr>
                                 </thead>
@@ -78,6 +79,9 @@
                                                 Rp. {{ $product['price'] }}
                                             </td>
                                             <td class="text-muted">{{ $product['stock'] }}</td>
+                                            <td class="text-muted">
+                                                {{ $product['is_active'] == 1 ? 'Active' : 'Non Active' }}
+                                            </td>
                                             <td>
                                                 <div class="btn-list flex-nowrap">
 
@@ -165,7 +169,17 @@
                                                 name="stock" />
                                         </div>
                                     </div>
+
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Show Product</label>
+                                <select class="form-select" name="is_active">
+                                    <option value="">Select Option</option>
+                                    <option value="1">Show</option>
+                                    <option value="0">Hide</option>
+
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Category Product</label>
@@ -248,8 +262,17 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Category Product</label>
-                                <select name="category_id" class="form-control">
+                                <label class="form-label">Show Product</label>
+                                <select class="form-select" name="is_active">
+                                    <option value="">Select Option</option>
+                                    <option value="1">Show</option>
+                                    <option value="0">Hide</option>
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Category</label>
+                                <select name="category_id" class="form-select">
                                     <option value="">Select Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category['id'] }}">{{ $category['category_name'] }} </option>

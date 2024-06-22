@@ -13,6 +13,9 @@
     <link href="{{ asset('assets/dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/dist/css/demo.min.css') }}" rel="stylesheet" />
 
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('midtrans.client_key') }}"></script>
+
     <style>
         @import url('https://rsms.me/inter/inter.css');
 

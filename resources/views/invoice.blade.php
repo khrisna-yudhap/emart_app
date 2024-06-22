@@ -22,13 +22,13 @@
                         {{ $userData->email . ' | ' . $userData->phone }}
                     </address>
                 </div>
-                <div class="col-5 d-block" style="text-align: end">
+                <div class="col-4 d-block" style="text-align: end">
                     <p class="h1 text-muted mb-3">Payment Status</p>
                     <br>
                     @if ($orderData->status == 'unpaid')
                         <span class="bg-orange-lt py-2 px-6 h3 " style="border-radius: 10px;">Unpaid</span>
                         <br><br><br>
-                        <p class="text-orange">Please complete this payment first before ordering again.</p>
+                        <p class="text-orange">Please complete the payment before ordering again.</p>
                     @elseif($orderData->status == 'paid')
                         <span class="bg-lime-lt py-2 px-6 h3 " style="border-radius: 10px;">Paid</span>
                     @endif
@@ -84,48 +84,10 @@
                         <td class="text-center text-lime h3 mb-0">Rp. {{ $subTotal }}</td>
 
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td colspan="4" class="strong text-end"></td>
-                        <td> <button class="btn btn-lime" id="pay-button">Pay Now</button></td>
-
-                    </tr>
                 @endif
             </table>
 
-            {{-- <p class="text-muted text-center mt-5">Thank you very much for doing business with us!</p> --}}
+            <p class="text-muted text-center mt-5">Thank you very much for doing business with us!</p>
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script type="text/javascript">
-        // For example trigger on button clicked, or any time you need
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function() {
-            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-            window.snap.pay('{{ $snapToken }}', {
-                onSuccess: function(result) {
-                    /* You may add your own implementation here */
-                    window.location.href =
-                        "{{ route('order.invoice', ['invoice_id' => $orderData->invoice_id]) }}"
-                    console.log(result);
-                },
-                onPending: function(result) {
-                    /* You may add your own implementation here */
-                    alert("wating your payment!");
-                    console.log(result);
-                },
-                onError: function(result) {
-                    /* You may add your own implementation here */
-                    alert("payment failed!");
-                    console.log(result);
-                },
-                onClose: function() {
-                    /* You may add your own implementation here */
-                    alert('you closed the popup without finishing the payment');
-                }
-            })
-        });
-    </script>
-@endpush

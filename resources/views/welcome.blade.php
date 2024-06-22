@@ -10,6 +10,7 @@
         </h1>
     </div>
     @include('flash_notification.success')
+    @include('flash_notification.error')
     <div class="card mt-3" style="border: none;">
         <div class="card-body">
             <div class="card-title mb-5">

@@ -48,10 +48,10 @@
                                 <thead>
                                     <tr>
                                         <th>Products</th>
-                                        <th width="40%">Description</th>
-                                        <th>Price</th>
-                                        <th>Total Stock</th>
-                                        <th>Product Status</th>
+                                        <th width="20%">Description</th>
+                                        <th width="10%">Price</th>
+                                        <th class="text-center">Total Stock</th>
+                                        <th class="text-center">Product Status</th>
                                         <th class="w-1"></th>
                                     </tr>
                                 </thead>
@@ -78,8 +78,8 @@
                                             <td class="text-muted">
                                                 Rp. {{ $product['price'] }}
                                             </td>
-                                            <td class="text-muted">{{ $product['stock'] }}</td>
-                                            <td class="text-muted">
+                                            <td class="text-muted text-center">{{ $product['stock'] }}</td>
+                                            <td class="text-muted text-center">
                                                 {{ $product['is_active'] == 1 ? 'Active' : 'Non Active' }}
                                             </td>
                                             <td>

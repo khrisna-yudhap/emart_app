@@ -44,10 +44,10 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium h3 mb-0 text-lime">
-                                                132 Total Orders
+                                                {{ $totalOrder }} Total Orders
                                             </div>
                                             <div class="text-muted">
-                                                12 waiting payments
+                                                {{ $pendingOrder }} waiting payments
                                             </div>
                                         </div>
                                     </div>
@@ -197,38 +197,48 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td><span class="text-muted">{{ $loop->iteration }}</span></td>
+                                        <td><a href="#" class="text-lime"
+                                                tabindex="-1">{{ $order->invoice_id }}</a>
+                                        </td>
+                                        <td>
+                                            {{ $order->first_name . ' ' . $order->last_name }}
+                                        </td>
+                                        <td>
+                                            {{ $order->email }}<br>
+                                            <small class="text-muted">{{ $order->phone }}</small>
+                                        </td>
+                                        <td>
+                                            {{ $order->created_at }}
+                                        </td>
+                                        <td>
+                                            @if ($order->status == 'paid')
+                                                <span class="badge bg-success me-1"></span>
+                                                Order Completed
+                                            @else
+                                                <span class="badge bg-red me-1"></span>
+                                                Order Pending
+                                            @endif
 
-                                    <td><span class="text-muted">001401</span></td>
-                                    <td><a href="#" class="text-lime" tabindex="-1">2302-2321-242A</a>
-                                    </td>
-                                    <td>
-                                        Jonathan Doe
-                                    </td>
-                                    <td>
-                                        admin@emart.com <br>
-                                        <small class="text-muted">08590066448</small>
-                                    </td>
-                                    <td>
-                                        15 Dec 2017
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-success me-1"></span> Paid
-                                    </td>
-                                    <td>Rp. 320,000</td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-muted">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                <path
-                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                            </svg>
-                                            Order Details</a>
-                                        {{-- <a href="#" class="btn btn-red">
+
+                                        </td>
+                                        <td>Rp. {{ $order->total_price }}</td>
+                                        <td class="text-end">
+                                            <a href="{{ route('order.view', ['id' => $order->id]) }}"
+                                                class="btn btn-muted">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                    <path
+                                                        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                                </svg>
+                                                Order Details</a>
+                                            {{-- <a href="#" class="btn btn-red">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -241,8 +251,10 @@
                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                             </svg>
                                             Delete</a> --}}
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

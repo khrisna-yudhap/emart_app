@@ -55,10 +55,13 @@ Route::middleware(['auth', 'user-role:administrator'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/users-management', [AdminController::class, 'users_view'])->name('admin.users');
     Route::post('/users/delete/{id}', [AdminController::class, 'delete_user'])->name('user.destroy');
+    Route::get('/order/view/{id}', [AdminController::class, 'order_detail'])->name('order.view');
 
     Route::get('/product-category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.destroy');
+
+
 
     Route::get('/products-management', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');

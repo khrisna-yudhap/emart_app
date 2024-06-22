@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -99,7 +100,6 @@ class OrderController extends Controller
         $type = $request->payment_type;
         $fraud = $request->fraud_status;
 
-
         $hashedKey = hash("sha512", $order_id . $status . $amount . $serverKey);
         if ($hashedKey != $request->signature_key) {
             abort(404, "Invalid Signature Key");
@@ -120,6 +120,16 @@ class OrderController extends Controller
                 if ($fraud == 'accept') {
                     // SET CART TO PAID
                     foreach ($cart_items as $item) {
+                        // find product by id
+                        $product = Product::find($item->product_id);
+
+                        // update stock
+                        $oldStock = $product->stock;
+                        $newStock = $oldStock - $item->item_quantity;
+                        $product->stock = $newStock;
+                        $product->save();
+
+                        // update status cart
                         $item->status = 'paid';
                         $item->save();
                     }
@@ -152,5 +162,27 @@ class OrderController extends Controller
             'userData' => $user,
             'subTotal' => $order->total_price,
         ]);
+    }
+
+    public function test_calculate()
+    {
+        $invoice_id = "INV-E-MART-20240622004";
+
+        $cart_items = Cart::where('invoice_id', $invoice_id)->get();
+
+        foreach ($cart_items as $item) {
+            // find product by id
+            $product = Product::find($item->product_id);
+
+            // update stock
+            $oldStock = $product->stock;
+            $newStock = $oldStock - $item->item_quantity;
+            $product->stock = $newStock;
+            $product->save();
+
+            // update status cart
+            $item->status = 'paid';
+            $item->save();
+        }
     }
 }

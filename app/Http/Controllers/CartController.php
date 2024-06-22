@@ -21,14 +21,6 @@ class CartController extends Controller
         $subTotal = 0;
         $subTotal = $cart_items->sum('item_price');
 
-        // if ($cartItemTotal != 0 & $cartItemTotal == 1) {
-        //     $subTotal = $cart_items->first()->item_price;
-        // } else {
-        //     foreach ($cart_items as $item) {
-        //         $subTotal = $item->sum('item_price');
-        //     }
-        // }
-
         $order = Order::where(['user_id' => $user_id, 'status' => 'unpaid'])->get();
         $pendingPayment = $order->isNotEmpty();
 
@@ -49,18 +41,23 @@ class CartController extends Controller
         $user_id = $request->user_id;
         $product_id = $request->product_id;
 
-        // // Check if theres pending payment
-        // $order = Order::where(['user_id' => $user_id, 'status' => 'unpaid'])->get();
-        // $pendingPayment = $order->isNotEmpty();
+        // Check if theres pending payment
+        $order = Order::where(['user_id' => $user_id, 'status' => 'unpaid'])->get();
+        $pendingPayment = $order->isNotEmpty();
 
-        // if ($pendingPayment) {
-        //     return redirect()->route('order.payment', ['invoice_id' => $order->first()->invoice_id]);
-        // }
+        if ($pendingPayment) {
+            return redirect()->route('order.payment', ['invoice_id' => $order->first()->invoice_id]);
+        }
 
         $product = Product::find($product_id);
         $productExist = Cart::where(['product_id' => $product_id, 'status' => 'unpaid', 'user_id' => $user_id])->first();
 
+        $maxOrder = $product->stock;
         $qty = $productExist != null ? $productExist->item_quantity : 1;
+
+        if ($qty + 1 > $maxOrder) {
+            return redirect()->route('index')->with('max-product-exceeded', 'There are no remaining stock in this product. Some is already in your cart.');
+        }
         $price = $product->price;
 
         $totalPrice = $price;

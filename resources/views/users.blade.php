@@ -31,14 +31,14 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table card-table table-vcenter text-nowrap datatable">
+                        <table class="table card-table table-vcenter datatable">
                             <thead>
                                 <tr>
                                     <th class="w-1">No.</th>
                                     <th>Customer Name</th>
                                     <th>Contact</th>
                                     <th>Address</th>
-                                    <th>Status</th>
+                                    <th width="20%">Status</th>
                                     <th></th>
                                 </tr>
                             </thead>

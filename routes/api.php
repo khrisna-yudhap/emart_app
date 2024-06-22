@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/payment-handler', [OrderController::class, 'payment_handler']);
+Route::get('/test-calculate', [OrderController::class, 'test_calculate']);

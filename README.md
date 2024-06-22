@@ -3,4 +3,4 @@
 
 ## E-Mart App
 
-Simple E-Commerce App made with Laravel 10
+Simple E-Commerce App integrated with MidTrans Payment Gateway made with Laravel 10
